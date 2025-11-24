@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="debug_test_form_view" model="ir.ui.view">
+        <field name="name">debug.test.form</field>
+        <field name="model">debug.test</field>
+        <field name="arch" type="xml">
+            <form string="Debug Test">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="description"/>
+                        <field name="computed_value"/>
+                    </group>
+                    <button name="action_debug" type="object" string="Run Debug Action" class="btn-primary"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="debug_test_tree_view" model="ir.ui.view">
+        <field name="name">debug.test.tree</field>
+        <field name="model">debug.test</field>
+        <field name="arch" type="xml">
+            <list string="Debug Tests">
+                <field name="name"/>
+                <field name="computed_value"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_debug_test" model="ir.actions.act_window">
+        <field name="name">Debug Tests</field>
+        <field name="res_model">debug.test</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <menuitem id="menu_debug_test" name="Debug Test" action="action_debug_test" parent="base.menu_custom" sequence="10"/>
+</odoo>
