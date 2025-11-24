@@ -1,205 +1,173 @@
-# Hướng Dẫn Cài Đặt Odoo (Có Video Hướng Dẫn Phía Dưới) **(Đọc Hướng Dẫn Thật Kỹ Trước Khi Cài Đặt)**
+# Hướng Dẫn Cài Đặt Odoo với Docker (Có Debug)
 
----
+## 📋 Tổng Quan
 
-## 🔹 Thông Tin Phiên Bản
+Repository này cung cấp cách dễ dàng để chạy Odoo 18 với Docker, bao gồm cả tính năng debug Python.
 
--   **Odoo 17 & Odoo 18**
--   Đã tích hợp thư viện **Odoo Accounting**
+## 🚀 Cài Đặt Nhanh
 
----
+### Yêu cầu hệ thống
 
-## ✅ Ưu & Nhược Điểm
+-   Docker Desktop
+-   VS Code (cho debug)
+-   Python extension trong VS Code
 
-### 🔥 Ưu Điểm
+### Các bước cài đặt
 
--   **Dễ triển khai** hơn so với cách cài đặt thủ công.
--   **Dễ khắc phục lỗi** nếu có sự cố xảy ra.
--   **Dễ gỡ bỏ** mà không lo mất dữ liệu như cách cài đặt truyền thống.
--   **Tích hợp sẵn module cần thiết**, không cần cài đặt thêm.
--   **Tối ưu tài nguyên**, chỉ chạy khi cần, không tốn tài nguyên khi tắt.
--   **Hỗ trợ đa nền tảng** (Windows, MacOS, Linux).
+1. **Clone repository:**
 
-### ⚠️ Nhược Điểm
-
--   Cần **một ít kiến thức kỹ thuật**.
--   **Dung lượng lớn hơn một chút** (~50MB, nhưng không đáng kể so với lợi ích mang lại).
-
----
-
-## 📌 Yêu Cầu Thiết Bị (Windows & MacOS)
-
-### 🔹 Cấu Hình Tối Thiểu
-
-#### Windows
-
--   **Hệ điều hành**: Windows 10 64-bit trở lên
--   **CPU**: Hỗ trợ ảo hóa (VT-x hoặc AMD-V)
--   **RAM**: Tối thiểu 4GB (khuyến nghị 8GB trở lên)
--   **Ổ cứng**: Tối thiểu 20GB dung lượng trống
--   **Mạng**: Kết nối internet ổn định để tải các container Docker
-
-#### MacOS
-
--   **Hệ điều hành**: macOS 11 (Big Sur) trở lên
--   **CPU**: Chip Intel hoặc Apple Silicon (M1, M2,...)
--   **RAM**: Tối thiểu 4GB (khuyến nghị 8GB trở lên)
--   **Ổ cứng**: Tối thiểu 20GB dung lượng trống
--   **Mạng**: Kết nối internet ổn định để tải các container Docker
-
-### 🔹 Cách Kiểm Tra Cấu Hình
-
-#### Windows
-
--   **Kiểm Tra Ảo Hóa CPU**
-    1. Mở **Task Manager** (`Ctrl + Shift + Esc`)
-    2. Chuyển sang tab **Performance**
-    3. Chọn mục **CPU**
-    4. Tìm mục **Virtualization**
-        - Nếu hiển thị **Enabled**, máy bạn hỗ trợ ảo hóa.
-        - Nếu hiển thị **Disabled**, cần bật ảo hóa trong BIOS.
-
-#### MacOS
-
--   **Kiểm Tra Dung Lượng Ổ Cứng**
-    1. Nhấn **Cmd + Space**, gõ "About This Mac" rồi nhấn **Enter**.
-    2. Chọn tab **Storage** để kiểm tra dung lượng trống.
-
----
-
-## 📌 Chuẩn Bị (Dành Cho Windows & MacOS)
-
-### 🔹 Windows
-
-#### Cách 1: Cài Đặt Docker Desktop (Ưu tiên)
-
-1. Tải và cài đặt **[Docker Desktop](https://www.docker.com/products/docker-desktop/)**.
-
-#### Cách 2: Cài Đặt Docker Qua Command Prompt
-
-1. Mở **CMD** (`Windows + R`, nhập `cmd`, nhấn **Enter**).
-2. Chạy lệnh sau để cài đặt Docker Desktop:
-
-    ```sh
-    winget install -e --id Docker.DockerDesktop
+    ```bash
+    git clone https://github.com/PhucChiVas161/odoo-erp-docker.git
+    cd odoo-erp-docker
     ```
 
-3. Hoàn tất quá trình cài đặt.
+2. **Chạy Odoo:**
 
-### 🔹 MacOS
-
-1. Tải **[Docker Desktop for Mac](https://www.docker.com/products/docker-desktop/)** và chọn đúng phiên bản (**Intel Chip** là dành cho các máy chạy chip Intel. **Apple Silicon** là dành cho các máy chạy chip M1,M2,...).
-2. Mở file `.dmg`, kéo ứng dụng **Docker** vào thư mục **Applications**.
-3. Mở Docker, chấp nhận điều khoản sử dụng.
-
----
-
-## 🚀 Cài Đặt Odoo 17 / Odoo 18
-
-1. Tải về phiên bản mới nhất tại **[Release](https://github.com/PhucChiVas161/odoo-erp-docker/releases)**.
-2. Giải nén thư mục vừa tải xuống.
-3. Truy cập vào thư mục đã giải nén.
-4. Nhấp chuột phải vào vùng trống trong thư mục, giữ **Shift**, chọn **Open with Terminal** hoặc **Open with Command Prompt**.
-
--   **MacOS**
-    ![Hướng dẫn sử dụng](/IMAGE/step4_mac.gif)
--   **Windows**
-
-5. Nhập lệnh sau để khởi chạy Odoo:
-
-    ```sh
+    ```bash
     docker-compose up -d
     ```
 
-6. Quá trình cài đặt sẽ diễn ra, tốc độ phụ thuộc vào tốc độ mạng và cấu hình máy.
-7. Khi xuất hiện dòng **Created (màu xanh)**, quá trình cài đặt đã hoàn tất.
-8. Truy cập Odoo bằng cách mở trình duyệt và nhập:
+3. **Truy cập Odoo:**
+    - URL: `http://localhost:8069`
+    - Tài khoản: `admin` / `admin`
 
-    ```cmd
-    http://localhost:8069
+## 🐛 Hướng Dẫn Debug
+
+### Chuẩn bị môi trường debug
+
+1. **Cài đặt Python extension trong VS Code**
+
+    - Mở VS Code
+    - `Ctrl+Shift+X` → Tìm "Python" → Install
+
+2. **Tạo cấu hình debug**
+
+    - `Ctrl+Shift+D` (Run and Debug)
+    - Click "create a launch.json file"
+    - Chọn "Python"
+    - Thay thế nội dung file `.vscode/launch.json`:
+
+    ```json
+    {
+        "version": "0.2.1",
+        "configurations": [
+            {
+                "name": "Attach to Odoo",
+                "type": "debugpy",
+                "request": "attach",
+                "connect": {
+                    "host": "localhost",
+                    "port": 5678
+                },
+                "pathMappings": [
+                    {
+                        "localRoot": "${workspaceFolder}/addons",
+                        "remoteRoot": "/mnt/extra-addons"
+                    }
+                ]
+            }
+        ]
+    }
     ```
 
-9. Những lần sau chạy, chỉ cần bật **Docker Desktop** tìm dòng **odoo_erp_docker** và bấm ⏯️ và truy cập **<http://localhost:8069>** trên trình duyệt
-   ![Hướng dẫn sử dụng](/IMAGE/step9.gif)
+### Quy trình debug
 
----
+1. **Đặt breakpoint:**
 
-## 🔄 Cách Restart Lại Odoo Nếu Gặp Lỗi (Windows & MacOS)
+    - Mở file code Python (ví dụ: `addons/custom_modules/models/debug_test.py`)
+    - Click vào số dòng bên trái để đặt breakpoint
 
-1. Mở **Command Prompt (Windows)** hoặc **Terminal (MacOS)** trong thư mục chứa file `docker-compose.yml`.
-2. Dừng container:
+2. **Attach debugger:**
 
-    ```sh
-    docker-compose down -v
-    ```
+    - Trong VS Code, chọn "Attach to Odoo" → Nhấn F5
+    - Chờ thông báo "Debugger attached"
 
-3. Khởi động lại container:
+3. **Start Odoo:**
 
-    ```sh
+    ```bash
     docker-compose up -d
     ```
 
-![Hướng dẫn sử dụng](/IMAGE/reset.gif)
+4. **Test debug:**
+    - Truy cập `http://localhost:8069`
+    - Vào Custom → Debug Test
+    - Tạo record mới hoặc click button để trigger code
+    - Breakpoint sẽ dừng lại trong VS Code
 
-4. Đợi một lúc và kiểm tra lại bằng cách truy cập:
+### Module debug mẫu
 
-    ```web
-    http://localhost:8069
-    ```
+Repository bao gồm module `custom_modules` với model `debug.test` để test debug:
+
+-   **File:** `addons/custom_modules/models/debug_test.py`
+-   **Breakpoints có thể đặt:**
+    -   Dòng tính `computed_value`
+    -   Method `action_debug`
+
+## 🔧 Lệnh hữu ích
+
+```bash
+# Start containers
+docker-compose up -d
+
+# Stop containers
+docker-compose down
+
+# View logs
+docker-compose logs -f web
+
+# Restart Odoo
+docker-compose restart web
+
+# Reset database
+docker-compose down -v
+docker-compose up -d
+```
+
+## 📁 Cấu trúc thư mục
+
+```
+odoo-erp-docker/
+├── docker-compose.yaml    # Cấu hình Docker
+├── Dockerfile            # Build Odoo image
+├── odoo.conf            # Cấu hình Odoo
+├── addons/              # Custom modules
+│   └── custom_modules/
+│       ├── __init__.py
+│       ├── __manifest__.py
+│       ├── models/
+│       │   ├── __init__.py
+│       │   └── debug_test.py
+│       └── views/
+│           └── debug_test_views.xml
+└── Readme.md
+```
+
+## ❓ Xử lý sự cố
+
+### Lỗi "Model not found"
+
+-   Đảm bảo đã tạo `__init__.py` trong thư mục module
+-   Restart containers: `docker-compose down && docker-compose up -d`
+
+### Debug không hoạt động
+
+-   Kiểm tra port 5678 không bị block
+-   Đảm bảo Python extension đã cài
+-   Restart VS Code
+
+### Database lỗi
+
+```bash
+# Reset database
+docker-compose down -v
+docker-compose up -d
+```
+
+## 📞 Liên hệ
+
+-   **GitHub:** [PhucChiVas161](https://github.com/PhucChiVas161)
+-   **Email:** phucchivas161@gmail.com
 
 ---
 
-## Setup mail SMTP trên Odoo (Chỉ sử dụng khi chạy Docker)
-
-![alt text](/IMAGE/image.png)
-
--   Setup cấu hình giống trong ảnh là được
--   Sau đó truy cập vào link sau để check mail:
-
-    ```web
-    localhost:8025
-    ```
-
----
-
-## 🎥 Video Hướng Dẫn
-
--   **Windows**: [Xem video hướng dẫn](https://youtu.be/FjjfyuB0In0?si=B0ckapFkOBOtvGF4)
-
--   **MacOS (Macbook, MacPro, iMac, v.v.)**: [Xem video hướng dẫn](https://youtu.be/ZMmPEiG77Sg?si=E-cYIltNPF8-TbRw)
-
----
-
-## ❌ Những Lỗi Phổ Biến (Windows) & Cách Khắc Phục
-
-### 🔹 Lỗi "Docker Engine Stopped" Khi Chạy Lần Đầu
-
-📌 **Giải pháp:**
-
-1. Mở **Command Prompt** (CMD) dưới quyền **Administrator**.
-2. Chạy lệnh sau:
-
-    ```sh
-    wsl --update
-    ```
-
-    ```sh
-    wsl --install --no-distribution
-    ```
-
-3. Đợi quá trình cập hoàn tất (**100%**).
-4. Khởi động lại máy tính
-5. Mở lại **Docker Desktop**, nếu thấy "Docker Engine starting..." thì chờ một chút để nó khởi động.
-
----
-
-💡 **Chúc bạn cài đặt thành công!** 🚀
-
-<h3 align="center">Liên hệ:</h3>
-<p align="center">
-<a href="https://fb.com/phucchivas1601" target="_blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/facebook.svg" alt="phucchivas1601" height="30" width="40" /></a>
-<a href="https://www.youtube.com/@phucchivas1601" target="_blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/youtube.svg" alt="@phucchivas1601" height="30" width="40" /></a>
-<a href="https://zalo.me/0931323078" target="_blank"><img align="center" src="https://upload.wikimedia.org/wikipedia/commons/9/91/Icon_of_Zalo.svg" alt="@phucchivas1601" height="30" width="40" /></a>
-<a href="https://t.me/phuchivas" target="_blank"><img align="center" src="https://upload.wikimedia.org/wikipedia/commons/8/83/Telegram_2019_Logo.svg" alt="@phucchivas1601" height="30" width="40" /></a>
-<a href="https://m.me/phucchivas1601" target="_blank"><img align="center" src="https://upload.wikimedia.org/wikipedia/commons/b/be/Facebook_Messenger_logo_2020.svg" alt="@phucchivas1601" height="30" width="40" /></a>
-</p>
+_Chúc bạn debug hiệu quả! 🐛✨_
